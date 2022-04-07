@@ -236,3 +236,10 @@ body,
 .hide {
 	display: none;
 }
+#test-show {
+	background-color: green;
+	position: absolute;
+	top: 40%;
+	left: 50%;
+	z-index: 1111;
+}

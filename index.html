@@ -20,6 +20,7 @@
 			<div class="tab-item">竞价中订单</div>
 		</div>
 		<div class="card-list" id="card-list">
+			<div id="test-show"></div>
 			<div class="card-wrap">
 				<img class="card-bg" src="./icons/order1.png" alt="">
 				<div class="card-price">
@@ -80,7 +81,13 @@
 	const inputComponentDom = document.getElementById("input-component")
 	const footerDom = document.getElementById("footer-wrap")
 	const delComponentDom = document.getElementById("del-component")
-
+	const screenHeight = window.innerHeight
+	const testDom = document.getElementById("test-show")
+	window.onresize = resize
+	function resize() {
+		console.log('res', screenHeight, window.innerHeight)
+		testDom.innerHTML = 'OH:' + screenHeight + ', NH:' + window.innerHeight 
+	}
 	function handleEditPrice(index) {
 		currentInputIndex = index
 		showDom(inputComponentDom)
