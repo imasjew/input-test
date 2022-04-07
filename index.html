@@ -9,144 +9,8 @@
 	<meta name="viewport"
 		content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 	<title>Document</title>
+	<link rel="stylesheet" href="index.css">
 </head>
-<style>
-	html,
-	body,
-	#app {
-		margin: 0;
-		padding: 0;
-		background-color: #f2f2f2;
-	}
-
-	.tab-wrap {
-		position: fixed;
-		top: 0;
-		width: 100%;
-		padding: 8px 0;
-		background-color: white;
-		display: flex;
-		justify-content: space-around;
-	}
-
-	.tab-item {
-		position: relative;
-		padding: 8px 0;
-		color: #acacac;
-	}
-
-	.current-tab {
-		color: #158d94;
-	}
-
-	.current-tab::before {
-		content: "";
-		position: absolute;
-		margin: 0 25%;
-		bottom: 0;
-		width: 50%;
-		height: 3px;
-		border-radius: 2px;
-		background-color: #158d94;
-	}
-
-	.card-list {
-		margin: 70px 0 84px;
-	}
-
-	.card-wrap {
-		margin: 16px;
-		width: auto;
-		height: 200px;
-		border-radius: 8px;
-		box-shadow: 0 0 4px #ddd;
-		background-color: white;
-		text-align: center;
-		line-height: 200px;
-	}
-
-	.price-text {
-		margin-left: 8px;
-		color: #158d94;
-	}
-
-	.footer-wrap {
-		position: fixed;
-		bottom: 0;
-		width: 100%;
-		padding: 8px 0;
-		box-shadow: 0 0 2px #ddd;
-		background-color: white;
-		display: flex;
-		justify-content: space-around;
-		z-index: 10;
-	}
-
-	.footer-item {
-		margin: 16px 0;
-		color: #ddd;
-	}
-
-	.selected-footer {
-		color: #498f9d;
-	}
-
-	.modal-wrap {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background-color: rgba(0, 0, 0, .3);
-	}
-
-	.hide {
-		display: none;
-	}
-
-	.input-modal-wrap {
-		position: absolute;
-		bottom: 0;
-		width: 100%;
-		height: 206px;
-		background-color: white;
-	}
-
-	.input-title-wrap {
-		padding: 12px;
-		width: auto;
-		background-color: #f3f3f3;
-		color: #d79386;
-		display: flex;
-		justify-content: space-between;
-	}
-
-	.confirm-btn {
-		color: #498f9d;
-	}
-
-	.input-body-wrap {
-		padding: 26px;
-	}
-
-	.input-body {
-		padding: 0 12px;
-		width: 100%;
-		height: 36px;
-		border: 1px solid #ddd;
-		border-radius: 6px;
-		box-sizing: border-box;
-	}
-
-	.input-body::-webkit-input-placeholder {
-		color: #ddd;
-	}
-
-	.input-body:focus {
-		outline: none;
-	}
-</style>
-
 
 <body>
 	<div class="main-wrap">
@@ -173,20 +37,18 @@
 			</div>
 		</div>
 		<div id="footer-wrap" class="footer-wrap">
-			<div class="footer-item selected-footer">订单中心</div>
-			<div class="footer-item">我的订单</div>
-			<div class="footer-item">我的消息</div>
-			<div class="footer-item">个人中心</div>
+			<img class="footer-bg" src="./icons/footer.png" alt="">
 		</div>
-		<div id="input-component" class="modal-wrap hide" onclick="handleClickMock()">
+		<div id="input-component" class="modal-wrap" onclick="handleClickMock()">
 			<div class="input-modal-wrap">
 				<div class="input-title-wrap">
 					<div>建议出价: 30 - 50</div>
 					<div class="confirm-btn" onclick="confirmPrice()">确定</div>
 				</div>
 				<div class="input-body-wrap">
-					<input id="input-price" placeholder="请输入您的保价" class="input-body" type="text" onfocus="handleInputFocus()"
+					<input id="input-price" class="input-body" type="number" onfocus="handleInputFocus()"
 						onblur="handleInputBlur()">
+					<div class="input-float-title">请填写您的出价(￥)</div>
 				</div>
 			</div>
 		</div>
