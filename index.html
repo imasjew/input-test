@@ -47,7 +47,7 @@
 		background-color: #158d94;
 	}
 
-	.body-wrap {
+	.card-list {
 		margin: 70px 0 84px;
 	}
 
@@ -58,6 +58,13 @@
 		border-radius: 8px;
 		box-shadow: 0 0 4px #ddd;
 		background-color: white;
+		text-align: center;
+		line-height: 200px;
+	}
+
+	.price-text {
+		margin-left: 8px;
+		color: #158d94;
 	}
 
 	.footer-wrap {
@@ -74,6 +81,11 @@
 
 	.footer-item {
 		margin: 16px 0;
+		color: #ddd;
+	}
+
+	.selected-footer {
+		color: #498f9d;
 	}
 
 	.modal-wrap {
@@ -94,32 +106,45 @@
 		position: absolute;
 		bottom: 0;
 		width: 100%;
-		height: 160px;
+		height: 206px;
 		background-color: white;
 	}
 
 	.input-title-wrap {
-		background-color: white;
+		padding: 12px;
+		width: auto;
+		background-color: #f3f3f3;
+		color: #d79386;
+		display: flex;
+		justify-content: space-between;
+	}
 
+	.confirm-btn {
+		color: #498f9d;
+	}
+
+	.input-body-wrap {
+		padding: 26px;
+	}
+
+	.input-body {
+		padding: 0 12px;
 		width: 100%;
+		height: 36px;
+		border: 1px solid #ddd;
+		border-radius: 6px;
+		box-sizing: border-box;
+	}
+
+	.input-body::-webkit-input-placeholder {
+		color: #ddd;
+	}
+
+	.input-body:focus {
+		outline: none;
 	}
 </style>
-<script>
-	function showInput() {
-		const inputComponent = document.getElementById("input-component")
-		console.log('inputComponent :>> ', inputComponent);
-		inputComponent.className += ' visible'
-	}
-	function hideModal(dom) {
-		return
-		const e = window.event || arguments.callee.caller.arguments[0]
-		e.preventDefault()
-		console.log('e :>> ', e);
-		const oldClass = dom.getAttribute("class")
-		const newClass = oldClass.replace("visible", "")
-		dom.setAttribute("class", newClass)
-	}
-</script>
+
 
 <body>
 	<div class="main-wrap">
@@ -128,38 +153,73 @@
 			<div class="tab-item">已出票</div>
 			<div class="tab-item">竞价中订单</div>
 		</div>
-		<div class="body-wrap">
-			<div class="card-wrap">卡
-				<button onclick="showInput()">选择出价</button>
+		<div class="card-list" id="card-list">
+			<div class="card-wrap">
+				订单出价: <span class="price-text" onclick="showInput(0)">选择出价</span>
 			</div>
-			<div class="card-wrap">卡
+			<div class="card-wrap">
+				订单出价: <span class="price-text" onclick="showInput(1)">选择出价</span>
 			</div>
-			<div class="card-wrap">卡
+			<div class="card-wrap">
+				订单出价: <span class="price-text" onclick="showInput(2)">选择出价</span>
 			</div>
-			<div class="card-wrap">卡
+			<div class="card-wrap">
+				订单出价: <span class="price-text" onclick="showInput(3)">选择出价</span>
 			</div>
-			<div class="card-wrap">卡
+			<div class="card-wrap">
+				订单出价: <span class="pirce-text" onclick="showInput(4)">选择出价</span>
 			</div>
 
 		</div>
 		<div class="footer-wrap">
-			<div class="footer-item">订单中心</div>
+			<div class="footer-item selected-footer">订单中心</div>
 			<div class="footer-item">我的订单</div>
 			<div class="footer-item">我的消息</div>
 			<div class="footer-item">个人中心</div>
 		</div>
-		<div id="input-component" class="modal-wrap visible" onclick="hideModal(this)">
+		<div id="input-component" class="modal-wrap" onclick="handleClickMock()">
 			<div class="input-modal-wrap">
 				<div class="input-title-wrap">
-					<div>建议出价30~50</div>
-					<div>取消</div>
+					<div>建议出价: 30 - 50</div>
+					<div class="confirm-btn" onclick="confirmPrice()">确定</div>
 				</div>
 				<div class="input-body-wrap">
-					<input type="text">
+					<input id="input-price" placeholder="请输入您的保价" class="input-body" type="text">
 				</div>
 			</div>
 		</div>
 	</div>
 </body>
+<script>
+	const cardListDom = document.getElementById("card-list").children
+	let currentInputIndex = null
+	const inputPriceDom = document.getElementById("input-price")
+	const inputComponentDom = document.getElementById("input-component")
+	function showInput(index) {
+		currentInputIndex = index
+		inputComponentDom.className += ' visible'
+	}
+	function handleClickMock() {
+		const e = window.event || arguments.callee.caller.arguments[0]
+		if (e.target.id !== 'input-component') return
+		hideInputModal()
+	}
+	function confirmPrice() {
+		const inputText = cardListDom[currentInputIndex].children[0]
+		if (inputPriceDom.value) {
+			inputText.innerHTML = inputPriceDom.value
+			hideInputModal()
+		} else {
+			alert('请输入价格')
+		}
+
+	}
+	function hideInputModal() {
+		inputPriceDom.value = null
+		const oldClass = inputComponentDom.getAttribute("class")
+		const newClass = oldClass.replace("visible", "")
+		inputComponentDom.setAttribute("class", newClass)
+	}
+</script>
 
 </html>
