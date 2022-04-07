@@ -106,7 +106,9 @@
 	}
 	function handleInputBlur() {
 		removeDomClass(footerDom, 'hide')
-		addDomClass(document.getElementById('input-modal-wrap'), 'input-modal-padding')
+		setTimeout(() => {
+			addDomClass(document.getElementById('input-modal-wrap'), 'input-modal-padding')
+		}, 50);
 	}
 	function handleClickInputMock() {
 		const e = window.event || arguments.callee.caller.arguments[0]
