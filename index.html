@@ -91,7 +91,7 @@
 		const delIconDom = document.getElementById("del-icon" + currentInputIndex)
 		if (inputPriceDom.value) {
 			// 赋值、隐藏modal、按钮和价格展示互换
-			priceDom.innerHTML = inputPriceDom.value
+			priceDom.innerHTML = '￥ ' + inputPriceDom.value
 			hideInputModal()
 			showDom(document.getElementById("price-text-wrap" + currentInputIndex))
 			hideDom(document.getElementById("price-btn" + currentInputIndex))
@@ -126,7 +126,7 @@
 		hideDom(delComponentDom)
 		hideDom(document.getElementById("price-text-wrap" + currentDelIndex))
 		showDom(document.getElementById("price-btn" + currentDelIndex))
-		
+
 	}
 	function handleCloseDel() {
 		hideDom(delComponentDom)
