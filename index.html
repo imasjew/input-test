@@ -126,7 +126,6 @@
 		hideDom(delComponentDom)
 		hideDom(document.getElementById("price-text-wrap" + currentDelIndex))
 		showDom(document.getElementById("price-btn" + currentDelIndex))
-
 	}
 	function handleCloseDel() {
 		hideDom(delComponentDom)
@@ -139,7 +138,11 @@
 	}
 
 	function hideDom(dom) {
+		if (dom.className.indexOf("hide") !== -1) {
+			return;
+		}
 		dom.className += ' hide'
+		console.log('dom.className :>> ', dom.className);
 	}
 	function showDom(dom) {
 		const oldClass = dom.getAttribute("class")
