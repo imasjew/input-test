@@ -98,11 +98,10 @@
 		width: 100%;
 		height: 100%;
 		background-color: rgba(0, 0, 0, .3);
-		display: none;
 	}
 
-	.visible {
-		display: block;
+	.hide {
+		display: none;
 	}
 
 	.input-modal-wrap {
@@ -158,50 +157,48 @@
 		</div>
 		<div class="card-list" id="card-list">
 			<div class="card-wrap">
-				订单出价: <span class="price-text" onclick="showInput(0)">选择出价</span>
+				订单出价: <span class="price-text" onclick="showInputModal(0)">选择出价</span>
 			</div>
 			<div class="card-wrap">
-				订单出价: <span class="price-text" onclick="showInput(1)">选择出价</span>
+				订单出价: <span class="price-text" onclick="showInputModal(1)">选择出价</span>
 			</div>
 			<div class="card-wrap">
-				订单出价: <span class="price-text" onclick="showInput(2)">选择出价</span>
+				订单出价: <span class="price-text" onclick="showInputModal(2)">选择出价</span>
 			</div>
 			<div class="card-wrap">
-				订单出价: <span class="price-text" onclick="showInput(3)">选择出价</span>
+				订单出价: <span class="price-text" onclick="showInputModal(3)">选择出价</span>
 			</div>
 			<div class="card-wrap">
-				订单出价: <span class="pirce-text" onclick="showInput(4)">选择出价</span>
+				订单出价: <span class="price-text" onclick="showInputModal(4)">选择出价</span>
 			</div>
-
 		</div>
-		<div class="footer-wrap">
+		<div id="footer-wrap" class="footer-wrap">
 			<div class="footer-item selected-footer">订单中心</div>
 			<div class="footer-item">我的订单</div>
 			<div class="footer-item">我的消息</div>
 			<div class="footer-item">个人中心</div>
 		</div>
-		<div id="input-component" class="modal-wrap" onclick="handleClickMock()">
+		<div id="input-component" class="modal-wrap hide" onclick="handleClickMock()">
 			<div class="input-modal-wrap">
 				<div class="input-title-wrap">
 					<div>建议出价: 30 - 50</div>
 					<div class="confirm-btn" onclick="confirmPrice()">确定</div>
 				</div>
 				<div class="input-body-wrap">
-					<input id="input-price" placeholder="请输入您的保价" class="input-body" type="text">
+					<input id="input-price" placeholder="请输入您的保价" class="input-body" type="text" onfocus="handleInputFocus()"
+						onblur="handleInputBlur()">
 				</div>
 			</div>
 		</div>
 	</div>
 </body>
 <script>
-	const cardListDom = document.getElementById("card-list").children
 	let currentInputIndex = null
+	const cardListDom = document.getElementById("card-list").children
 	const inputPriceDom = document.getElementById("input-price")
 	const inputComponentDom = document.getElementById("input-component")
-	function showInput(index) {
-		currentInputIndex = index
-		inputComponentDom.className += ' visible'
-	}
+	const footerDom = document.getElementById("footer-wrap")
+
 	function handleClickMock() {
 		const e = window.event || arguments.callee.caller.arguments[0]
 		if (e.target.id !== 'input-component') return
@@ -215,13 +212,29 @@
 		} else {
 			alert('请输入价格')
 		}
-
 	}
+	function showInputModal(index) {
+		currentInputIndex = index
+		showDom(inputComponentDom)
+	}
+	function handleInputFocus() {
+		hideDom(footerDom)
+	}
+	function handleInputBlur() {
+		showDom(footerDom)
+	}
+
 	function hideInputModal() {
 		inputPriceDom.value = null
-		const oldClass = inputComponentDom.getAttribute("class")
-		const newClass = oldClass.replace("visible", "")
-		inputComponentDom.setAttribute("class", newClass)
+		hideDom(inputComponentDom)
+	}
+	function hideDom(dom) {
+		dom.className += ' hide'
+	}
+	function showDom(dom) {
+		const oldClass = dom.getAttribute("class")
+		const newClass = oldClass.replace("hide", "")
+		dom.setAttribute("class", newClass)
 	}
 </script>
 
