@@ -147,8 +147,11 @@ body,
 
 .input-float-title {
 	position: absolute;
-	left: 28px;
-	top: 32px;
+	left: 0;
+	top: 0;
+	margin: 16px;
+	padding-left: 8px;
+	line-height: 56px;
 	color: #333;
 }
 
