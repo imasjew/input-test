@@ -83,11 +83,11 @@
 	const delComponentDom = document.getElementById("del-component")
 	const screenHeight = window.innerHeight
 	const testDom = document.getElementById("test-show")
-	window.onresize = resize
-	function resize() {
-		console.log('res', screenHeight, window.innerHeight)
-		testDom.innerHTML = 'OH:' + screenHeight + ', NH:' + window.innerHeight 
-	}
+	// window.onresize = resize
+	// function resize() {
+	// 	console.log('res', screenHeight, window.innerHeight)
+	// 	testDom.innerHTML = 'OH:' + screenHeight + ', NH:' + window.innerHeight 
+	// }
 	function handleEditPrice(index) {
 		currentInputIndex = index
 		showDom(inputComponentDom)
@@ -109,6 +109,10 @@
 
 	function handleInputFocus() {
 		hideDom(footerDom)
+		setTimeout(() => {
+			console.log('res', screenHeight, window.innerHeight)
+			testDom.innerHTML = 'OH:' + screenHeight + ', NH:' + window.innerHeight
+		}, 200);
 	}
 	function handleInputBlur() {
 		showDom(footerDom)
