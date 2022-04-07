@@ -20,7 +20,6 @@
 			<div class="tab-item">竞价中订单</div>
 		</div>
 		<div class="card-list" id="card-list">
-			<div id="test-show"></div>
 			<div class="card-wrap">
 				<img class="card-bg" src="./icons/order1.png" alt="">
 				<div class="card-price">
@@ -49,7 +48,7 @@
 			<img class="footer-bg" src="./icons/footer.png" alt="">
 		</div>
 		<div id="input-component" class="modal-wrap hide" onclick="handleClickInputMock()">
-			<div class="input-modal-wrap">
+			<div id="input-modal-wrap" class="input-modal-wrap input-modal-padding">
 				<div class="input-title-wrap">
 					<div>建议出价: 30 - 50</div>
 					<div class="confirm-btn" onclick="confirmPrice()">确定</div>
@@ -81,16 +80,10 @@
 	const inputComponentDom = document.getElementById("input-component")
 	const footerDom = document.getElementById("footer-wrap")
 	const delComponentDom = document.getElementById("del-component")
-	const screenHeight = window.innerHeight
-	const testDom = document.getElementById("test-show")
-	// window.onresize = resize
-	// function resize() {
-	// 	console.log('res', screenHeight, window.innerHeight)
-	// 	testDom.innerHTML = 'OH:' + screenHeight + ', NH:' + window.innerHeight 
-	// }
+
 	function handleEditPrice(index) {
 		currentInputIndex = index
-		showDom(inputComponentDom)
+		removeDomClass(inputComponentDom, 'hide')
 	}
 
 	function confirmPrice() {
@@ -100,22 +93,20 @@
 			// 赋值、隐藏modal、按钮和价格展示互换
 			priceDom.innerHTML = '￥ ' + inputPriceDom.value
 			hideInputModal()
-			showDom(document.getElementById("price-text-wrap" + currentInputIndex))
-			hideDom(document.getElementById("price-btn" + currentInputIndex))
+			removeDomClass(document.getElementById("price-text-wrap" + currentInputIndex), 'hide')
+			addDomClass(document.getElementById("price-btn" + currentInputIndex), 'hide')
 		} else {
 			alert('请输入价格')
 		}
 	}
 
 	function handleInputFocus() {
-		hideDom(footerDom)
-		setTimeout(() => {
-			console.log('res', screenHeight, window.innerHeight)
-			testDom.innerHTML = 'OH:' + screenHeight + ', NH:' + window.innerHeight
-		}, 200);
+		addDomClass(footerDom, 'hide')
+		removeDomClass(document.getElementById('input-modal-wrap'), 'input-modal-padding')
 	}
 	function handleInputBlur() {
-		showDom(footerDom)
+		removeDomClass(footerDom, 'hide')
+		addDomClass(document.getElementById('input-modal-wrap'), 'input-modal-padding')
 	}
 	function handleClickInputMock() {
 		const e = window.event || arguments.callee.caller.arguments[0]
@@ -124,22 +115,22 @@
 	}
 	function hideInputModal() {
 		inputPriceDom.value = null
-		hideDom(inputComponentDom)
+		addDomClass(inputComponentDom, 'hide')
 	}
 
 	function showDelConfirm(index) {
 		currentDelIndex = index
-		showDom(delComponentDom)
+		removeDomClass(delComponentDom, 'hide')
 	}
 	function handleConfirmDel() {
 		const priceDom = document.getElementById("price-text" + currentDelIndex)
 		priceDom.innerHTML = ""
-		hideDom(delComponentDom)
-		hideDom(document.getElementById("price-text-wrap" + currentDelIndex))
-		showDom(document.getElementById("price-btn" + currentDelIndex))
+		addDomClass(delComponentDom, 'hide')
+		addDomClass(document.getElementById("price-text-wrap" + currentDelIndex), 'hide')
+		removeDomClass(document.getElementById("price-btn" + currentDelIndex), 'hide')
 	}
 	function handleCloseDel() {
-		hideDom(delComponentDom)
+		addDomClass(delComponentDom, 'hide')
 	}
 
 	function handleClickDelMock() {
@@ -148,16 +139,16 @@
 		hideInputModal()
 	}
 
-	function hideDom(dom) {
-		if (dom.className.indexOf("hide") !== -1) {
+	function addDomClass(dom, addClass) {
+		if (dom.className.indexOf(addClass) !== -1) {
 			return;
 		}
-		dom.className += ' hide'
+		dom.className += ' ' + addClass
 		console.log('dom.className :>> ', dom.className);
 	}
-	function showDom(dom) {
+	function removeDomClass(dom, delClass) {
 		const oldClass = dom.getAttribute("class")
-		const newClass = oldClass.replace("hide", "")
+		const newClass = oldClass.replace(delClass, "")
 		dom.setAttribute("class", newClass)
 	}
 </script>
